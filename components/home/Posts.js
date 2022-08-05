@@ -17,7 +17,7 @@ export default function Posts() {
 
 const Post = ({ post }) => {
   return (
-    <View style={{ marginBottom: 10 }}>
+    <View style={{ marginBottom: 16 }}>
       <Divider />
       <PostTop post={post} />
       <Image
@@ -25,12 +25,34 @@ const Post = ({ post }) => {
         style={{ height: 400, resizeMode: 'cover' }}
       />
       <PostAction post={post} />
-      <Text style={{ color: 'white' }}>{numeral(post.like).format('0,0')} likes</Text>
+      <Text style={{ color: 'white' }}>
+        {numeral(post.like).format('0,0')} likes
+      </Text>
       <View style={{ flexDirection: 'row', paddingTop: 5 }}>
-        <Text style={{ color: 'white', marginRight: 4, fontWeight: '900' }}>{post.username}</Text>
+        <Text style={{ color: 'white', marginRight: 4, fontWeight: '900' }}>
+          {post.username}
+        </Text>
         <Text style={{ color: 'white' }}>{post.caption}</Text>
       </View>
-      <Text style={{ color: 'grey', paddingTop: 5 }}>View all {post.comments.length} comments</Text>
+      <Comments post={post} />
+    </View>
+  )
+}
+
+const Comments = ({ post }) => {
+  return (
+    <View>
+      <Text style={{ color: 'grey', paddingTop: 5 }}>
+        View all {post.comments.length} comments
+      </Text>
+      {post.comments.map((c) => (
+        <View style={{ flexDirection: 'row' }}>
+          <Text style={{ color: 'white', paddingRight: 4, fontWeight: '900' }}>
+            {c.username}
+          </Text>
+          <Text style={{ color: 'white' }}>{c.message}</Text>
+        </View>
+      ))}
     </View>
   )
 }

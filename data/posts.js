@@ -8,11 +8,13 @@ export const posts = [
     caption: 'This my first day of programmer!',
     comments: [
       {
-        message: 'So cool!'
+        message: 'So cool!',
+        username: 'john'
       },
 
       {
-        message: 'Well!'
+        message: 'Well!',
+        username: 'jack'
       }
     ]
   },
@@ -25,7 +27,8 @@ export const posts = [
     caption: 'This my first day of programmer!',
     comments: [
       {
-        message: 'So cool!'
+        message: 'So cool!',
+        username: 'john'
       }
     ]
   },
