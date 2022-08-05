@@ -1,15 +1,16 @@
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import React from 'react'
 import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
+import Posts from '../components/home/Posts'
 
 export default function Home() {
   return (
-    <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
-        <Header />
-        <Stories />
-        <Text style={{color:'white'}}>Test</Text>
+    <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
+      <Header />
+      <Stories />
+      <Posts />
     </SafeAreaView>
   )
 }
