@@ -4,6 +4,7 @@ import React from 'react'
 import Header from '../components/home/Header'
 import Stories from '../components/home/Stories'
 import Posts from '../components/home/Posts'
+import BottomTabs from '../components/home/BottomTabs'
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Header />
       <Stories />
       <Posts />
+      <BottomTabs />
     </SafeAreaView>
   )
 }
