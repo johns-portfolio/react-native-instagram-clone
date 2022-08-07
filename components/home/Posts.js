@@ -20,10 +20,12 @@ const Post = ({ post }) => {
     <View style={{ marginBottom: 16 }}>
       <Divider />
       <PostTop post={post} />
-      <Image
-        source={{ uri: post.imageUrl }}
-        style={{ height: 400, resizeMode: 'cover' }}
-      />
+      <TouchableOpacity>
+        <Image
+          source={{ uri: post.imageUrl }}
+          style={{ height: 400, resizeMode: 'cover' }}
+        />
+      </TouchableOpacity>
       <PostAction post={post} />
       <Text style={{ color: 'white' }}>
         {numeral(post.like).format('0,0')} likes
@@ -45,8 +47,8 @@ const Comments = ({ post }) => {
       <Text style={{ color: 'grey', paddingTop: 5 }}>
         View all {post.comments.length} comments
       </Text>
-      {post.comments.map((c) => (
-        <View style={{ flexDirection: 'row' }}>
+      {post.comments.map((c, i) => (
+        <View style={{ flexDirection: 'row' }} key={i}>
           <Text style={{ color: 'white', paddingRight: 4, fontWeight: '900' }}>
             {c.username}
           </Text>
