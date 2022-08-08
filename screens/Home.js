@@ -6,10 +6,10 @@ import Stories from '../components/home/Stories'
 import Posts from '../components/home/Posts'
 import BottomTabs from '../components/home/BottomTabs'
 
-export default function Home() {
+export default function Home({navigation}) {
   return (
     <SafeAreaView style={{ backgroundColor: 'black', flex: 1 }}>
-      <Header />
+      <Header navigation={navigation} />
       <Stories />
       <Posts />
       <BottomTabs />

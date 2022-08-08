@@ -4,10 +4,10 @@ import React from 'react'
 import Header from '../components/newPost/Header'
 import FormPost from '../components/newPost/FormPost'
 
-export default function NewPost() {
+export default function NewPost({navigation}) {
   return (
     <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
-      <Header />
+      <Header navigation={navigation} />
       <FormPost />
     </SafeAreaView>
   )

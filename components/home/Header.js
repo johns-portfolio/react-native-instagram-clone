@@ -2,7 +2,7 @@ import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
-export default function Header() {
+export default function Header({navigation}) {
   return (
     <View
       style={{
@@ -16,7 +16,7 @@ export default function Header() {
         style={{ height: 50, width: 150, resizeMode: 'contain' }}
       />
       <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.push('NewPost')}>
           <Ionicons
             name="duplicate-outline"
             color={'white'}
