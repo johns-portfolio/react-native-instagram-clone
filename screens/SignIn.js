@@ -13,7 +13,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { Formik } from 'formik'
 import * as yup from 'yup'
 
-export default function SignIn({navigation}) {
+export default function SignIn({ navigation }) {
   return (
     <SafeAreaView style={{ alignItems: 'center', paddingHorizontal: 10 }}>
       <Formik
@@ -88,22 +88,10 @@ export default function SignIn({navigation}) {
               </TouchableOpacity>
               <View style={{ marginTop: 30 }}>
                 <Pressable
-                  style={{
-                    backgroundColor: isValid ? '#63a7ff' : '#a2c9fc',
-                    alignItems: 'center',
-                    paddingVertical: 10
-                  }}
+                  style={styles.button(isValid)}
                   onPress={handleSubmit}
                 >
-                  <Text
-                    style={{
-                      color: 'white',
-                      fontSize: 16,
-                      fontWeight: 'bold'
-                    }}
-                  >
-                    Log In
-                  </Text>
+                  <Text style={styles.buttonText}>Log In</Text>
                 </Pressable>
                 <View
                   style={{
@@ -114,7 +102,7 @@ export default function SignIn({navigation}) {
                   }}
                 >
                   <Text>Don't have account? </Text>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => navigation.push('SignUp')}>
                     <Text style={{ color: '#63a7ff' }}>Sign Up</Text>
                   </TouchableOpacity>
                 </View>
@@ -127,7 +115,7 @@ export default function SignIn({navigation}) {
   )
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
   textInputs: (isValid) => ({
     borderColor: isValid ? '#ccc' : 'red',
     borderWidth: 1,
@@ -137,5 +125,15 @@ const styles = StyleSheet.create({
     paddingVertical: 6,
     borderRadius: 4,
     backgroundColor: '#efefef'
-  })
+  }),
+  button: (isValid) => ({
+    backgroundColor: isValid ? '#63a7ff' : '#a2c9fc',
+    alignItems: 'center',
+    paddingVertical: 10
+  }),
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold'
+  }
 })
