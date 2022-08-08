@@ -4,13 +4,16 @@ import {
   Image,
   TextInput,
   Pressable,
-  TouchableOpacity
+  TouchableOpacity,
+  Alert
 } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { styles } from './SignIn'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { doc, setDoc, getFirestore } from 'firebase/firestore'
 
 export default function SignUp({ navigation }) {
   return (
@@ -19,7 +22,7 @@ export default function SignUp({ navigation }) {
         initialValues={{
           email: 'aaa@bbb.ccc',
           name: 'Apisit Sianglert',
-          password: '1111'
+          password: '111111'
         }}
         validationSchema={yup.object().shape({
           email: yup.string().email().required(),
@@ -27,7 +30,34 @@ export default function SignUp({ navigation }) {
           password: yup.string().min(4).required()
         })}
         validateOnMount={true}
-        onSubmit={() => navigation.push('Home')}
+        onSubmit={async ({ email, name, password }) => {
+          const auth = getAuth()
+          try {
+            const userCredential = await createUserWithEmailAndPassword(
+              auth,
+              email,
+              password
+            )
+
+            const db = getFirestore()
+            await setDoc(doc(db, 'users', userCredential.user.uid), {
+              username: email,
+              email: email,
+              name: name,
+              profile_picture: 'https://randomuser.me/api/portraits/men/62.jpg'
+            })
+
+            navigation.push('SignIn')
+          } catch (error) {
+            console.log('🔥 error', error)
+            Alert.alert('🔥 Error Message', error.message, [
+              {
+                text: 'Ok',
+                style: 'cancel'
+              }
+            ])
+          }
+        }}
       >
         {({ values, errors, handleSubmit, handleChange, isValid }) => (
           <>

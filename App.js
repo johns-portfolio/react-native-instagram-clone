@@ -1,9 +1,7 @@
-import { View, Text } from 'react-native'
 import React from 'react'
-import Home from './screens/Home'
-import NewPost from './screens/NewPost'
-import Navigation from './Navigation'
+import './firebase'
+import AuthNavigation from './AuthNavigation'
 
 export default function App() {
-  return <Navigation />
+  return <AuthNavigation />
 }

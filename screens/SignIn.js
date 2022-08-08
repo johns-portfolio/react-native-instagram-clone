@@ -6,12 +6,14 @@ import {
   StyleSheet,
   TouchableOpacity,
   Button,
-  Pressable
+  Pressable,
+  Alert
 } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { Formik } from 'formik'
 import * as yup from 'yup'
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 
 export default function SignIn({ navigation }) {
   return (
@@ -19,7 +21,7 @@ export default function SignIn({ navigation }) {
       <Formik
         initialValues={{
           username: 'aaa@bbb.ccc',
-          password: '11111'
+          password: '111111'
         }}
         validationSchema={yup.object().shape({
           username: yup
@@ -32,9 +34,28 @@ export default function SignIn({ navigation }) {
             .required('Password is required!')
         })}
         validateOnMount={true}
-        onSubmit={(values) => {
-          console.log(values)
-          navigation.push('Home')
+        onSubmit={async ({ username, password }) => {
+          const auth = getAuth()
+          try {
+            const userCredential = await signInWithEmailAndPassword(
+              auth,
+              username,
+              password
+            )
+            console.log('🔥 Signed In')
+          } catch (error) {
+            console.log('🔥 error', error)
+            Alert.alert('🔥Error Message', error.message, [
+              {
+                text: 'Ok',
+                style: 'cancel'
+              },
+              {
+                text: 'Sign Up',
+                onPress: () => navigation.push('SignUp')
+              }
+            ])
+          }
         }}
       >
         {({
@@ -76,7 +97,7 @@ export default function SignIn({ navigation }) {
                   placeholder="Password"
                   value={values.password}
                   onChangeText={handleChange('password')}
-                  keyboardType="visible-password"
+                  // keyboardType="visible-password"
                   secureTextEntry={true}
                   textContentType="password"
                 />

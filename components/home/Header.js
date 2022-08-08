@@ -1,8 +1,11 @@
 import { View, Text, Image, StyleSheet, TouchableOpacity } from 'react-native'
 import React from 'react'
 import Ionicons from 'react-native-vector-icons/Ionicons'
+import { getAuth } from 'firebase/auth'
 
-export default function Header({navigation}) {
+const auth = getAuth()
+
+export default function Header({ navigation }) {
   return (
     <View
       style={{
@@ -11,10 +14,14 @@ export default function Header({navigation}) {
         alignItems: 'center'
       }}
     >
-      <Image
-        source={require('../../assets/logo.jpg')}
-        style={{ height: 50, width: 150, resizeMode: 'contain' }}
-      />
+      <TouchableOpacity
+        onPress={() => auth.signOut().then(() => console.log('🔥 Signed Out'))}
+      >
+        <Image
+          source={require('../../assets/logo.jpg')}
+          style={{ height: 50, width: 150, resizeMode: 'contain' }}
+        />
+      </TouchableOpacity>
       <View style={{ flexDirection: 'row', paddingHorizontal: 10 }}>
         <TouchableOpacity onPress={() => navigation.push('NewPost')}>
           <Ionicons
