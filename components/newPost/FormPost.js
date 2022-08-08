@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as yup from 'yup'
 import Divider from '../Divider'
 
-export default function FormPost() {
+export default function FormPost({navigation}) {
   const [imageThumbnail, setImageThumbnail] = useState('')
   return (
     <Formik
@@ -19,6 +19,7 @@ export default function FormPost() {
       }}
       onSubmit={(values) => {
         console.log('🔥 onSubmit values', values)
+        navigation.goBack()
       }}
     >
       {({

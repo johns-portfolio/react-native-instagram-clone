@@ -8,7 +8,7 @@ export default function NewPost({navigation}) {
   return (
     <SafeAreaView style={{backgroundColor: 'black', flex: 1}}>
       <Header navigation={navigation} />
-      <FormPost />
+      <FormPost navigation={navigation} />
     </SafeAreaView>
   )
 }
